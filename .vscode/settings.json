@@ -1,0 +1,27 @@
+{
+	"eslint.validate": [
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact"
+	],
+	"files.exclude": {
+		"*/node_modules/": true,
+		"*/package-lock.json": true
+	},
+	"editor.formatOnSave": true,
+	"typescript.validate.enable": true,
+	// we try to make semantic highlighting look good
+	"editor.semanticHighlighting.enabled": true,
+	// prevent VSCode from modifying the terminal colors
+	"terminal.integrated.minimumContrastRatio": 1,
+	// make the window's titlebar use the workbench colors
+	"window.titleBarStyle": "custom",
+
+	"tailwindCSS.includeLanguages": {
+		"javascript": "javascript",
+		"javascriptreact": "javascriptreact",
+		"typescript": "typescript",
+		"typescriptreact": "typescriptreact"
+	}
+}
