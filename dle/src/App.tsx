@@ -49,7 +49,7 @@ export default function App() {
 
 			<hr className="h-px my-8 bg-gray-200 border-0 w-full" />
 
-			<ResultPanel />
+			<ResultPanel results={results} />
 		</main>
 	);
 }

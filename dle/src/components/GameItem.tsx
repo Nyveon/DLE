@@ -29,7 +29,7 @@ export default function GameItem({
 					"block px-2 py-1 grow-1",
 					result
 						? "bg-green-700 hover:bg-green-600 text-gray-200 italic"
-						: "bg-blue-700 hover:bg-blue-600 text-white",
+						: "bg-yellow-700 hover:bg-yellow-600 text-white",
 					"rounded-lg"
 				)}
 			>
