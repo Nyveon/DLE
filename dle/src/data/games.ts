@@ -1,6 +1,7 @@
 import iconConnections from "@/assets/icon-connections.svg";
 import iconOec from "@/assets/icon-oec.ico";
 import iconFoodGuessr from "@/assets/icon-foodguessr.png";
+import iconCountryle from "@/assets/icon-countryle.png";
 
 export interface Game {
 	name: string;
@@ -28,6 +29,15 @@ export const games: Record<string, Game> = {
 		check: {
 			identifier: "FoodGuessr",
 			slice: -3,
+		},
+	},
+	countryle: {
+		name: "Countryle",
+		url: "https://countryle.com/",
+		icon: iconCountryle,
+		check: {
+			identifier: "Countryle",
+			slice: -2,
 		},
 	},
 	tradle: {

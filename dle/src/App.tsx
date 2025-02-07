@@ -15,7 +15,13 @@ export default function App() {
 			return Object.entries(games).some(([key, game]) => {
 				if (text.includes(game.check.identifier)) {
 					const processed = game.check.slice
-						? text.split("\n").slice(0, game.check.slice).join("\n")
+						? text
+								.split("\n")
+								.filter((l) => {
+									return l.trim().length > 0;
+								})
+								.slice(0, game.check.slice)
+								.join("\n")
 						: text;
 
 					if (results[key] === processed) {
