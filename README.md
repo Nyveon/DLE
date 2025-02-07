@@ -1,2 +1,7 @@
 # DLE
-daily game hub (specific to us but one day might be a proper project)
+
+Daily game hub (specific to the game we are playing, but one day might be a proper project)
+
+Deployed here: <https://www.dle.eric.tc/>
+
+Made with React, TypeScript, Tailwind, Vite.
