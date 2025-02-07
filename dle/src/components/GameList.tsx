@@ -9,7 +9,7 @@ export default function GameList({
 	results: GameResults;
 }) {
 	return (
-		<ul className="flex flex-col gap-4 text-center">
+		<ul className="flex flex-col gap-2 text-center">
 			{Object.entries(games).map(([key, game]) => (
 				<GameItem key={key} game={game} result={results[key]} />
 			))}
