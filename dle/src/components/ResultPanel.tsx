@@ -1,4 +1,5 @@
 import { GameResults } from "@/data/games";
+import { toast } from "react-toastify";
 
 export default function ResultPanel({ results }: { results: GameResults }) {
 	let completed = 0;
@@ -7,7 +8,7 @@ export default function ResultPanel({ results }: { results: GameResults }) {
 	const month = date.getMonth() + 1;
 	const year = date.getFullYear();
 	const shortYear = year.toString().slice(-2);
-	let output = `dle.eric.tc - ${day}/${month}/${shortYear}\n\n`;
+	let output = `dle.eric.tc - ${day}/${month}/${shortYear}`;
 
 	for (const result of Object.values(results)) {
 		if (!result) {
@@ -15,31 +16,37 @@ export default function ResultPanel({ results }: { results: GameResults }) {
 		}
 
 		completed++;
-		output += `${result}\n\n`;
+		output += `\n\n${result}`;
 	}
 
 	async function share() {
 		try {
 			await navigator.clipboard.writeText(output);
-			alert("Results copied to clipboard c:");
-		} catch (err) {
-			console.error("Error copying results:", err);
+			toast("Results copied to clipboard c:", {
+				type: "success",
+			});
+		} catch {
+			toast("Error copying results to clipboard", {
+				type: "error",
+			});
 		}
 	}
 
+	console.log(output);
+
 	return (
 		<>
-			<pre className="bg-slate-700 p-3 rounded-md border-2 border-slate-600">
-				{completed ? output : "No results yet."}
-			</pre>
-			{completed && (
+			{completed != 0 && (
 				<button
-					className="w-24 mt-2 p-2 bg-blue-700 hover:bg-blue-600 text-white rounded-md"
+					className="w-24 mt-2 p-2 bg-blue-700 hover:bg-blue-600 text-white rounded-md cursor-pointer"
 					onClick={share}
 				>
 					Share
 				</button>
 			)}
+			<pre className="bg-slate-700 p-3 rounded-md border-2 border-slate-600">
+				{completed != 0 ? output : "No results yet."}
+			</pre>
 		</>
 	);
 }

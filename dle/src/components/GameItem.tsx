@@ -4,23 +4,29 @@ import { clsx } from "clsx/lite";
 export default function GameItem({
 	game,
 	result,
+	checkClipboard,
 }: {
 	game: Game;
 	result: string;
+	checkClipboard: () => void;
 }) {
 	return (
 		<li className="flex items-center gap-2">
-			<div
+			<button
+				title="Check clipboard"
 				className={clsx(
 					"flex place-content-center w-6 h-6",
 					"border-2 rounded-full",
-					result ? "border-gray-100" : "border-gray-400",
+					result
+						? "border-gray-100 pointer-events-none"
+						: "border-gray-400 hover:border-gray-200",
 					"font-bold leading-5",
-					"pointer-events-none"
+					"cursor-pointer"
 				)}
+				onClick={checkClipboard}
 			>
 				{result && "✓"}
-			</div>
+			</button>
 			<a
 				href={game.url}
 				target="_blank"

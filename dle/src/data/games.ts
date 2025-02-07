@@ -33,7 +33,7 @@ export const games: Record<string, Game> = {
 	},
 	pick5: {
 		name: "Pick5",
-		url: "https://www.nytimes.com/pick5",
+		url: "https://oec.world/en/games/pick-5",
 		check: {
 			identifier: "Pick5",
 			slice: -2,
