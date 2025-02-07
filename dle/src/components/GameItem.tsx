@@ -32,13 +32,14 @@ export default function GameItem({
 				target="_blank"
 				rel="noreferrer noopener"
 				className={clsx(
-					"block px-2 py-1 grow-1",
+					"flex items-center px-3 py-1 grow-1 gap-1.5",
 					result
 						? "bg-green-700 hover:bg-green-600 text-gray-200 italic"
 						: "bg-yellow-700 hover:bg-yellow-600 text-white",
 					"rounded-lg"
 				)}
 			>
+				<img src={game.icon} className="size-6 mix-blend-multiply"></img>
 				{game.name}
 			</a>
 		</li>

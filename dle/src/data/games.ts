@@ -1,6 +1,11 @@
+import iconConnections from "@/assets/icon-connections.svg";
+import iconOec from "@/assets/icon-oec.ico";
+import iconFoodGuessr from "@/assets/icon-foodguessr.png";
+
 export interface Game {
 	name: string;
 	url: string;
+	icon: string;
 	check: {
 		identifier: string;
 		slice?: number;
@@ -11,6 +16,7 @@ export const games: Record<string, Game> = {
 	connections: {
 		name: "Connections",
 		url: "https://www.nytimes.com/games/connections",
+		icon: iconConnections,
 		check: {
 			identifier: "Connections",
 		},
@@ -18,14 +24,16 @@ export const games: Record<string, Game> = {
 	foodguessr: {
 		name: "FoodGuessr",
 		url: "https://foodguessr.com/",
+		icon: iconFoodGuessr,
 		check: {
 			identifier: "FoodGuessr",
 			slice: -3,
 		},
 	},
 	tradle: {
-		name: "#Tradle",
-		url: "https://tradle.io/",
+		name: "Tradle",
+		url: "https://oec.world/en/games/tradle",
+		icon: iconOec,
 		check: {
 			identifier: "#Tradle",
 			slice: -1,
@@ -34,6 +42,7 @@ export const games: Record<string, Game> = {
 	pick5: {
 		name: "Pick5",
 		url: "https://oec.world/en/games/pick-5",
+		icon: iconOec,
 		check: {
 			identifier: "Pick5",
 			slice: -2,
