@@ -36,7 +36,8 @@ export default function GameItem({
 					result
 						? "bg-green-700 hover:bg-green-600 text-gray-200 italic"
 						: "bg-yellow-700 hover:bg-yellow-600 text-white",
-					"rounded-lg"
+					"rounded-lg",
+					!game.url && "pointer-events-none"
 				)}
 			>
 				<img src={game.icon} className="size-6 mix-blend-multiply"></img>

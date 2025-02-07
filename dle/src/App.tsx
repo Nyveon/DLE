@@ -6,6 +6,30 @@ import { toast, ToastContainer } from "react-toastify";
 
 export default function App() {
 	const [results, setResults] = useState<GameResults>({});
+	const [secret, setSecret] = useState<boolean>(false);
+
+	function helloSkelebert() {
+		if (secret) {
+			return;
+		}
+
+		const score = Math.floor(Math.random() * 5) + 1;
+		const emojis = "🦴".repeat(score) + "🌑".repeat(5 - score);
+
+		const number = Math.floor(
+			(Date.now() - new Date("2025-02-06").getTime()) / (1000 * 60 * 60 * 24)
+		);
+
+		setResults((prev) => ({
+			...prev,
+			skelebertle: `Skelebertle: Skeleberto #${number}\n${emojis}`,
+		}));
+
+		toast("Hello Skeleberto!", {
+			type: "success",
+		});
+		setSecret(true);
+	}
 
 	const checkClipboard = useCallback(async () => {
 		try {
@@ -13,6 +37,10 @@ export default function App() {
 			if (!text || text.trim().length === 0) return false;
 
 			return Object.entries(games).some(([key, game]) => {
+				if (!game.check.identifier) {
+					return false;
+				}
+
 				if (text.includes(game.check.identifier)) {
 					const processed = game.check.slice
 						? text
@@ -77,10 +105,17 @@ export default function App() {
 	}, [checkClipboard]);
 
 	return (
-		<main className="flex flex-col items-center gap-2">
-			<h1 className="text-3xl font-bold mb-6">Super Gaming 3000</h1>
+		<main className="flex flex-col items-center gap-2 pb-12">
+			<h1 className="text-3xl font-bold mb-6" onClick={helloSkelebert}>
+				Super Gaming 3000
+			</h1>
 
-			<GameList games={games} results={results} checkClipboard={manualCheck} />
+			<GameList
+				games={games}
+				results={results}
+				checkClipboard={manualCheck}
+				secret={secret}
+			/>
 
 			<hr className="h-px my-8 bg-slate-600 border-0 w-full" />
 

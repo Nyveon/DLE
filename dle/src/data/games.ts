@@ -2,11 +2,13 @@ import iconConnections from "@/assets/icon-connections.svg";
 import iconOec from "@/assets/icon-oec.ico";
 import iconFoodGuessr from "@/assets/icon-foodguessr.png";
 import iconCountryle from "@/assets/icon-countryle.png";
+import skelegif from "@/assets/skelebertle.gif";
 
 export interface Game {
 	name: string;
 	url: string;
 	icon: string;
+	secret?: boolean;
 	check: {
 		identifier: string;
 		slice?: number;
@@ -56,6 +58,16 @@ export const games: Record<string, Game> = {
 		check: {
 			identifier: "Pick5",
 			slice: -2,
+		},
+	},
+	skelebertle: {
+		name: "Skelebertle",
+		url: "",
+		icon: skelegif,
+		secret: true,
+		check: {
+			identifier: "",
+			slice: -1,
 		},
 	},
 };
