@@ -15,7 +15,8 @@ export default function GameItem({
 					"flex place-content-center w-6 h-6",
 					"border-2 rounded-full",
 					result ? "border-gray-100" : "border-gray-400",
-					"font-bold leading-5"
+					"font-bold leading-5",
+					"pointer-events-none"
 				)}
 			>
 				{result && "✓"}

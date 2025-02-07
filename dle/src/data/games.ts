@@ -1,19 +1,43 @@
 export interface Game {
 	name: string;
 	url: string;
-	identifier: string;
+	check: {
+		identifier: string;
+		slice?: number;
+	};
 }
 
 export const games: Record<string, Game> = {
-	wordle: {
-		name: "Wordle",
-		identifier: "Wordle",
-		url: "https://www.nytimes.com/games/wordle/index.html",
-	},
 	connections: {
 		name: "Connections",
-		identifier: "Connections",
 		url: "https://www.nytimes.com/games/connections",
+		check: {
+			identifier: "Connections",
+		},
+	},
+	foodguessr: {
+		name: "FoodGuessr",
+		url: "https://foodguessr.com/",
+		check: {
+			identifier: "FoodGuessr",
+			slice: -3,
+		},
+	},
+	tradle: {
+		name: "#Tradle",
+		url: "https://tradle.io/",
+		check: {
+			identifier: "#Tradle",
+			slice: -1,
+		},
+	},
+	pick5: {
+		name: "Pick5",
+		url: "https://www.nytimes.com/pick5",
+		check: {
+			identifier: "Pick5",
+			slice: -2,
+		},
 	},
 };
 
