@@ -22,7 +22,7 @@ describe("compileResults", () => {
 		expect(compiled.body).toBe("dle.eric.tc - 10/2/25");
 	});
 
-	it("should compile results correctly when given multiple game results", () => {
+	it("should compile results correctly when given multiple game results, sorted by key", () => {
 		const results: GameResults = {
 			connections: "Connections result",
 			foodguessr: "FoodGuessr result",
@@ -37,11 +37,11 @@ describe("compileResults", () => {
 		expect(compiled.body).toBe(
 			"dle.eric.tc - 10/2/25" +
 				"\n\nConnections result" +
-				"\n\nFoodGuessr result" +
 				"\n\nCountryle result" +
-				"\n\nTradle result" +
+				"\n\nFoodGuessr result" +
 				"\n\nPick5 result" +
-				"\n\nSkelebertle result"
+				"\n\nSkelebertle result" +
+				"\n\nTradle result"
 		);
 	});
 

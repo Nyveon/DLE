@@ -6,7 +6,6 @@ interface ResultsCompilation {
 }
 
 export function compileResults(results: GameResults): ResultsCompilation {
-	//todo: sort
 	let count = 0;
 	const date = new Date();
 	const day = date.getDate();
@@ -15,7 +14,10 @@ export function compileResults(results: GameResults): ResultsCompilation {
 	const shortYear = year.toString().slice(-2);
 	let body = `dle.eric.tc - ${day}/${month}/${shortYear}`;
 
-	for (const result of Object.values(results)) {
+	const sortedKeys = Object.keys(results).sort();
+
+	for (const key of sortedKeys) {
+		const result = results[key];
 		if (!result) {
 			continue;
 		}
