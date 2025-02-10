@@ -3,6 +3,7 @@ import { games, GameResults } from "@/ts/games";
 import GameList from "@/components/GameList";
 import ResultPanel from "@/components/ResultPanel";
 import { toast, ToastContainer } from "react-toastify";
+import { identifyGame } from "@/ts/util";
 
 export default function App() {
 	const [results, setResults] = useState<GameResults>({});
@@ -36,38 +37,35 @@ export default function App() {
 			const text = await navigator.clipboard.readText();
 			if (!text || text.trim().length === 0) return false;
 
-			return Object.entries(games).some(([key, game]) => {
-				if (!game.check.identifier) {
+			const gameKey = identifyGame(text, games);
+
+			if (gameKey) {
+				const game = games[gameKey];
+				const processed = game.check.slice
+					? text
+							.split("\n")
+							.filter((l) => {
+								return l.trim().length > 0;
+							})
+							.slice(0, game.check.slice)
+							.join("\n")
+					: text;
+
+				if (results[gameKey] === processed) {
 					return false;
 				}
 
-				if (text.includes(game.check.identifier)) {
-					const processed = game.check.slice
-						? text
-								.split("\n")
-								.filter((l) => {
-									return l.trim().length > 0;
-								})
-								.slice(0, game.check.slice)
-								.join("\n")
-						: text;
+				setResults((prev) => ({
+					...prev,
+					[gameKey]: processed,
+				}));
 
-					if (results[key] === processed) {
-						return false;
-					}
+				toast(`Found results for ${game.name}!`, {
+					type: "success",
+				});
 
-					setResults((prev) => ({
-						...prev,
-						[key]: processed,
-					}));
-
-					toast(`Found results for ${game.name}!`, {
-						type: "success",
-					});
-
-					return true;
-				}
-			});
+				return true;
+			}
 		} catch {
 			toast("Error reading clipboard!", {
 				type: "error",

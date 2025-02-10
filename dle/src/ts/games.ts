@@ -4,16 +4,20 @@ import iconFoodGuessr from "@/assets/icon-foodguessr.png";
 import iconCountryle from "@/assets/icon-countryle.png";
 import skelegif from "@/assets/skelebertle.gif";
 
+interface Check {
+	identifier: string;
+	slice?: number;
+}
+
 export interface Game {
 	name: string;
 	url: string;
 	icon: string;
 	secret?: boolean;
-	check: {
-		identifier: string;
-		slice?: number;
-	};
+	check: Check;
 }
+
+export type CheckableGame = Pick<Game, "check">;
 
 export const games: Record<string, Game> = {
 	connections: {
