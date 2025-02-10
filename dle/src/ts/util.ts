@@ -50,8 +50,7 @@ export function identifyGame(
 			continue;
 		}
 
-		//todo: startsWith
-		if (text.includes(game.check.identifier)) {
+		if (text.startsWith(game.check.identifier)) {
 			return key;
 		}
 	}

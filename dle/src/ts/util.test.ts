@@ -67,16 +67,21 @@ describe("compileResults", () => {
 });
 
 describe("identifyGame", () => {
-	it("should return the key of the game that matches the identifier, or null if no match", () => {
-		const games: Record<string, CheckableGame> = {
-			game1: { check: { identifier: "id1" } },
-			game2: { check: { identifier: "id2" } },
-		};
+	const games: Record<string, CheckableGame> = {
+		game1: { check: { identifier: "id1" } },
+		game2: { check: { identifier: "id2" } },
+	};
 
+	it("should return the key of the game that matches the identifier", () => {
 		expect(identifyGame("id1\netcetc", games)).toBe("game1");
 		expect(identifyGame("id2", games)).toBe("game2");
-		expect(identifyGame("id3\ntest", games)).toBe(null);
-        expect(identifyGame(" id1\ntest", games)).toBe("game1"); // Trim not in this step
-        expect(identifyGame("xid1\ntest", games)).toBe(null); // Only starts with
+		expect(identifyGame("id2fdfgh\netcetc", games)).toBe("game2");
+	});
+
+	it("should return null if it doesn't match any game", () => {
+		expect(identifyGame("", games)).toBe(null); // Is Empty
+		expect(identifyGame("id3\ntest", games)).toBe(null); // ID not present
+		expect(identifyGame(" id1\ntest", games)).toBe(null); // Trim not in this step
+		expect(identifyGame("xid1\ntest", games)).toBe(null); // Only starts with
 	});
 });
