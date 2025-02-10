@@ -25,7 +25,7 @@ export interface Game {
 	url: string;
 	icon: string;
 	secret?: boolean;
-	check: Check;
+	check?: Check;
 }
 
 export const games: Record<GameId, Game> = {
@@ -43,7 +43,7 @@ export const games: Record<GameId, Game> = {
 		icon: iconFoodGuessr,
 		check: {
 			identifier: "FoodGuessr",
-			slice: -3,
+			slice: -2,
 		},
 	},
 	countryle: {
@@ -78,10 +78,6 @@ export const games: Record<GameId, Game> = {
 		url: "",
 		icon: skelegif,
 		secret: true,
-		check: {
-			identifier: "",
-			slice: -1,
-		},
 	},
 };
 

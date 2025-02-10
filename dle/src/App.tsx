@@ -69,9 +69,7 @@ export default function App() {
 	}, [results]);
 
 	async function manualCheck() {
-		console.log("here");
 		const result = await checkClipboard();
-		console.log(result);
 		if (!result) {
 			toast("No results found in clipboard.", {
 				type: "info",
