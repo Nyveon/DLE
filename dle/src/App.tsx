@@ -3,7 +3,7 @@ import { games, GameResults } from "@/ts/games";
 import GameList from "@/components/GameList";
 import ResultPanel from "@/components/ResultPanel";
 import { toast, ToastContainer } from "react-toastify";
-import { identifyGame } from "@/ts/util";
+import { identifyGame, processShareText } from "@/ts/util";
 
 export default function App() {
 	const [results, setResults] = useState<GameResults>({});
@@ -41,15 +41,7 @@ export default function App() {
 
 			if (gameKey) {
 				const game = games[gameKey];
-				const processed = game.check.slice
-					? text
-							.split("\n")
-							.filter((l) => {
-								return l.trim().length > 0;
-							})
-							.slice(0, game.check.slice)
-							.join("\n")
-					: text;
+				const processed = processShareText(text, game);
 
 				if (results[gameKey] === processed) {
 					return false;
