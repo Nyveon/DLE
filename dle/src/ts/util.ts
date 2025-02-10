@@ -46,7 +46,7 @@ export function identifyGame(
 	return (
 		GameIds.find((key) => {
 			const game = games[key];
-			return game?.check.identifier && text.startsWith(game.check.identifier);
+			return game?.check?.identifier && text.startsWith(game.check.identifier);
 		}) || null
 	);
 }
