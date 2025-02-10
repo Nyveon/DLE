@@ -1,5 +1,5 @@
-import { GameResults } from "@/ts/games";
-import { compileResults } from "@/ts/util";
+import { CheckableGame, GameResults } from "@/ts/games";
+import { compileResults, identifyGame } from "@/ts/util";
 import { vi, describe, it, expect } from "vitest";
 
 const mockDate = new Date(2025, 1, 10);
@@ -63,5 +63,20 @@ describe("compileResults", () => {
 				"\n\nCountryle result" +
 				"\n\nPick5 result"
 		);
+	});
+});
+
+describe("identifyGame", () => {
+	it("should return the key of the game that matches the identifier, or null if no match", () => {
+		const games: Record<string, CheckableGame> = {
+			game1: { check: { identifier: "id1" } },
+			game2: { check: { identifier: "id2" } },
+		};
+
+		expect(identifyGame("id1\netcetc", games)).toBe("game1");
+		expect(identifyGame("id2", games)).toBe("game2");
+		expect(identifyGame("id3\ntest", games)).toBe(null);
+        expect(identifyGame(" id1\ntest", games)).toBe("game1"); // Trim not in this step
+        expect(identifyGame("xid1\ntest", games)).toBe(null); // Only starts with
 	});
 });
