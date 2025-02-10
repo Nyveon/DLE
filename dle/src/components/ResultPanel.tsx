@@ -1,27 +1,13 @@
-import { GameResults } from "@/data/games";
+import { GameResults } from "@/ts/games";
+import { compileResults } from "@/ts/util";
 import { toast } from "react-toastify";
 
 export default function ResultPanel({ results }: { results: GameResults }) {
-	let completed = 0;
-	const date = new Date();
-	const day = date.getDate();
-	const month = date.getMonth() + 1;
-	const year = date.getFullYear();
-	const shortYear = year.toString().slice(-2);
-	let output = `dle.eric.tc - ${day}/${month}/${shortYear}`;
-
-	for (const result of Object.values(results)) {
-		if (!result) {
-			continue;
-		}
-
-		completed++;
-		output += `\n\n${result}`;
-	}
+	const { count, body } = compileResults(results);
 
 	async function share() {
 		try {
-			await navigator.clipboard.writeText(output);
+			await navigator.clipboard.writeText(body);
 			toast("Results copied to clipboard c:", {
 				type: "success",
 			});
@@ -32,11 +18,9 @@ export default function ResultPanel({ results }: { results: GameResults }) {
 		}
 	}
 
-	console.log(output);
-
 	return (
 		<>
-			{completed != 0 && (
+			{count != 0 && (
 				<button
 					className="w-24 mt-2 p-2 bg-blue-700 hover:bg-blue-600 text-white rounded-md cursor-pointer"
 					onClick={share}
@@ -45,7 +29,7 @@ export default function ResultPanel({ results }: { results: GameResults }) {
 				</button>
 			)}
 			<pre className="bg-slate-700 p-3 rounded-md border-2 border-slate-600">
-				{completed != 0 ? output : "No results yet."}
+				{count != 0 ? body : "No results yet."}
 			</pre>
 		</>
 	);

@@ -1,5 +1,5 @@
 import GameItem from "@/components/GameItem";
-import { Game, GameResults } from "@/data/games";
+import { Game, GameResults } from "@/ts/games";
 
 export default function GameList({
 	games,

@@ -1,4 +1,4 @@
-import { Game } from "@/data/games";
+import { Game } from "@/ts/games";
 import { clsx } from "clsx/lite";
 
 export default function GameItem({

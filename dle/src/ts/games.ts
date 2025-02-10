@@ -39,7 +39,7 @@ export const games: Record<string, Game> = {
 		icon: iconCountryle,
 		check: {
 			identifier: "Countryle",
-			slice: -2,
+			slice: -1,
 		},
 	},
 	tradle: {
