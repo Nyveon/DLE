@@ -1,4 +1,4 @@
-import { CheckableGame, GameResults } from "@/ts/games";
+import { CheckableGames, GameResults } from "@/ts/games";
 import { compileResults, identifyGame } from "@/ts/util";
 import { vi, describe, it, expect } from "vitest";
 
@@ -37,11 +37,11 @@ describe("compileResults", () => {
 		expect(compiled.body).toBe(
 			"dle.eric.tc - 10/2/25" +
 				"\n\nConnections result" +
-				"\n\nCountryle result" +
 				"\n\nFoodGuessr result" +
+				"\n\nCountryle result" +
+				"\n\nTradle result" +
 				"\n\nPick5 result" +
-				"\n\nSkelebertle result" +
-				"\n\nTradle result"
+				"\n\nSkelebertle result"
 		);
 	});
 
@@ -67,15 +67,15 @@ describe("compileResults", () => {
 });
 
 describe("identifyGame", () => {
-	const games: Record<string, CheckableGame> = {
-		game1: { check: { identifier: "id1" } },
-		game2: { check: { identifier: "id2" } },
+	const games: CheckableGames = {
+		connections: { check: { identifier: "id1" } },
+		pick5: { check: { identifier: "id2" } },
 	};
 
 	it("should return the key of the game that matches the identifier", () => {
-		expect(identifyGame("id1\netcetc", games)).toBe("game1");
-		expect(identifyGame("id2", games)).toBe("game2");
-		expect(identifyGame("id2fdfgh\netcetc", games)).toBe("game2");
+		expect(identifyGame("id1\netcetc", games)).toBe("connections");
+		expect(identifyGame("id2", games)).toBe("pick5");
+		expect(identifyGame("id2fdfgh\netcetc", games)).toBe("pick5");
 	});
 
 	it("should return null if it doesn't match any game", () => {

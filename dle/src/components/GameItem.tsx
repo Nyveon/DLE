@@ -7,7 +7,7 @@ export default function GameItem({
 	checkClipboard,
 }: {
 	game: Game;
-	result: string;
+	result: string | undefined;
 	checkClipboard: () => void;
 }) {
 	return (

@@ -3,7 +3,8 @@ import { games, GameResults } from "@/ts/games";
 import GameList from "@/components/GameList";
 import ResultPanel from "@/components/ResultPanel";
 import { toast, ToastContainer } from "react-toastify";
-import { identifyGame, processShareText } from "@/ts/util";
+import { identifyGame } from "@/ts/util";
+import { processShareText } from "@/ts/processing";
 
 export default function App() {
 	const [results, setResults] = useState<GameResults>({});

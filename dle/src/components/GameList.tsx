@@ -1,5 +1,5 @@
 import GameItem from "@/components/GameItem";
-import { Game, GameResults } from "@/ts/games";
+import { Game, GameIds, GameResults } from "@/ts/games";
 
 export default function GameList({
 	games,
@@ -14,16 +14,19 @@ export default function GameList({
 }) {
 	return (
 		<ul className="flex flex-col gap-2 text-center">
-			{Object.entries(games).flatMap(([key, game]) => {
+			{GameIds.flatMap((gameId) => {
+				const game = games[gameId];
+				const result = results[gameId];
+
 				if (game.secret && !secret) {
 					return [];
 				}
 
 				return (
 					<GameItem
-						key={key}
+						key={gameId}
 						game={game}
-						result={results[key]}
+						result={result}
 						checkClipboard={checkClipboard}
 					/>
 				);

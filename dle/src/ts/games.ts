@@ -4,6 +4,17 @@ import iconFoodGuessr from "@/assets/icon-foodguessr.png";
 import iconCountryle from "@/assets/icon-countryle.png";
 import skelegif from "@/assets/skelebertle.gif";
 
+export const GameIds = [
+	"connections",
+	"foodguessr",
+	"countryle",
+	"tradle",
+	"pick5",
+	"skelebertle",
+] as const;
+
+export type GameId = (typeof GameIds)[number];
+
 interface Check {
 	identifier: string;
 	slice?: number;
@@ -17,9 +28,7 @@ export interface Game {
 	check: Check;
 }
 
-export type CheckableGame = Pick<Game, "check">;
-
-export const games: Record<string, Game> = {
+export const games: Record<GameId, Game> = {
 	connections: {
 		name: "Connections",
 		url: "https://www.nytimes.com/games/connections",
@@ -76,6 +85,6 @@ export const games: Record<string, Game> = {
 	},
 };
 
-export type GameResults = {
-	[K in keyof typeof games]: string;
-};
+export type GameResults = Partial<Record<GameId, string>>;
+export type CheckableGame = Pick<Game, "check">;
+export type CheckableGames = Partial<Record<GameId, CheckableGame>>;

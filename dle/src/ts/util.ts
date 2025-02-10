@@ -1,4 +1,4 @@
-import { CheckableGame, Game, GameResults } from "@/ts/games";
+import { CheckableGames, GameId, GameIds, GameResults } from "@/ts/games";
 
 interface ResultsCompilation {
 	count: number;
@@ -19,9 +19,7 @@ export function compileResults(results: GameResults): ResultsCompilation {
 	const shortYear = year.toString().slice(-2);
 	let body = `dle.eric.tc - ${day}/${month}/${shortYear}`;
 
-	const sortedKeys = Object.keys(results).sort();
-
-	for (const key of sortedKeys) {
+	for (const key of GameIds) {
 		const result = results[key];
 		if (!result) {
 			continue;
@@ -43,39 +41,12 @@ export function compileResults(results: GameResults): ResultsCompilation {
  */
 export function identifyGame(
 	text: string,
-	games: Record<string, CheckableGame>
-) {
-	for (const [key, game] of Object.entries(games)) {
-		if (!game.check.identifier) {
-			continue;
-		}
-
-		if (text.startsWith(game.check.identifier)) {
-			return key;
-		}
-	}
-
-	return null;
-}
-
-/**
- * Normalizes and chops game sharing text for later result compilation
- * @param text game share text, probably from clipboard
- * @param game corresponding game
- * @returns cleaned share text
- */
-export function processShareText(text: string, game: Game) {
-	let processed = text.trim();
-
-	if (game.check.slice) {
-		processed = processed
-			.split("\n")
-			.filter((l) => {
-				return l.trim().length > 0;
-			})
-			.slice(0, game.check.slice)
-			.join("\n");
-	}
-
-	return processed;
+	games: CheckableGames
+): GameId | null {
+	return (
+		GameIds.find((key) => {
+			const game = games[key];
+			return game?.check.identifier && text.startsWith(game.check.identifier);
+		}) || null
+	);
 }
