@@ -1,7 +1,6 @@
 import {
 	CheckableGames,
 	gameExamples,
-	GameId,
 	GameIds,
 	GameResults,
 	games,
