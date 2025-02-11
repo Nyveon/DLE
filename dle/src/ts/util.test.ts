@@ -1,4 +1,11 @@
-import { CheckableGames, GameResults } from "@/ts/games";
+import {
+	CheckableGames,
+	gameExamples,
+	GameId,
+	GameIds,
+	GameResults,
+	games,
+} from "@/ts/games";
 import { compileResults, identifyGame } from "@/ts/util";
 import { vi, describe, it, expect } from "vitest";
 
@@ -67,21 +74,31 @@ describe("compileResults", () => {
 });
 
 describe("identifyGame", () => {
-	const games: CheckableGames = {
+	const testGames: CheckableGames = {
 		connections: { check: { identifier: "id1" } },
 		pick5: { check: { identifier: "id2" } },
 	};
 
 	it("should return the key of the game that matches the identifier", () => {
-		expect(identifyGame("id1\netcetc", games)).toBe("connections");
-		expect(identifyGame("id2", games)).toBe("pick5");
-		expect(identifyGame("id2fdfgh\netcetc", games)).toBe("pick5");
+		expect(identifyGame("id1\netcetc", testGames)).toBe("connections");
+		expect(identifyGame("id2", testGames)).toBe("pick5");
+		expect(identifyGame("id2fdfgh\netcetc", testGames)).toBe("pick5");
 	});
 
 	it("should return null if it doesn't match any game", () => {
-		expect(identifyGame("", games)).toBe(null); // Is Empty
-		expect(identifyGame("id3\ntest", games)).toBe(null); // ID not present
-		expect(identifyGame(" id1\ntest", games)).toBe(null); // Trim not in this step
-		expect(identifyGame("xid1\ntest", games)).toBe(null); // Only starts with
+		expect(identifyGame("", testGames)).toBe(null); // Is Empty
+		expect(identifyGame("id3\ntest", testGames)).toBe(null); // ID not present
+		expect(identifyGame(" id1\ntest", testGames)).toBe(null); // Trim not in this step
+		expect(identifyGame("xid1\ntest", testGames)).toBe(null); // Only starts with
 	});
+
+	it.each(GameIds.filter((gameId) => games[gameId].check))(
+		"should identify %s correctly",
+		(gameId) => {
+			expect(gameExamples[gameId]).toBeDefined();
+			const example = gameExamples[gameId]!;
+			expect(example.expected).toBeTruthy();
+			expect(identifyGame(example.expected, games)).toBe(gameId);
+		}
+	);
 });
