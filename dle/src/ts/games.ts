@@ -51,7 +51,7 @@ export const games: Record<GameId, Game> = {
 		url: "https://countryle.com/",
 		icon: iconCountryle,
 		check: {
-			identifier: "Countryle",
+			identifier: "#Countryle",
 			slice: -1,
 		},
 	},
