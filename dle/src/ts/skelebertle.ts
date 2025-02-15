@@ -16,6 +16,8 @@ import imgSkele8 from "@/assets/images/run.gif";
 import sndSkele8 from "@/assets/sounds/skele3.ogg";
 import imgSkele9 from "@/assets/images/3d.gif";
 import sndSkele9 from "@/assets/sounds/skele4.ogg";
+import imgSkele10 from "@/assets/images/walk.gif";
+import sndSkele10 from "@/assets/sounds/skele5.ogg";
 
 export interface SkeletonTemplate {
 	id: number;
@@ -81,10 +83,18 @@ export const skeletons: SkeletonTemplate[] = [
 		imageUrl: imgSkele9,
 		sound: sndSkele9,
 	},
+	{
+		id: 10,
+		name: "Skeleten",
+		imageUrl: imgSkele10,
+		sound: sndSkele10,
+	},
 ];
 
+const trueMaxScore = skeletons.length + 1;
+
 export function skelebertleResult(score: number) {
-	const emojis = "🦴".repeat(score) + "🌑".repeat(skeletons.length - score);
+	const emojis = "🦴".repeat(score) + "🌑".repeat(trueMaxScore - score);
 
 	const number = Math.floor(
 		(Date.now() - new Date("2025-02-06").getTime()) / (1000 * 60 * 60 * 24)

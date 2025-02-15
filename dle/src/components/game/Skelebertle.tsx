@@ -5,9 +5,11 @@ import GameItem from "@/components/GameItem";
 import { toast } from "react-toastify";
 
 import sndStart from "@/assets/sounds/laugh.wav";
+import sndSecret from "@/assets/sounds/bones.mp3";
 import { skelebertleResult, skeletons } from "@/ts/skelebertle";
 
 const audioStart = new Audio(sndStart);
+const audioSecret = new Audio(sndSecret);
 
 export default function Skelebertle({
 	game,
@@ -19,6 +21,7 @@ export default function Skelebertle({
 	const [score, setScore] = useState<number>(0);
 	const [timeRemaining, setTimeRemaining] = useState<number>(5);
 	const [gameOver, setGameOver] = useState<boolean>(false);
+	const [secretFound, setSecretFound] = useState<boolean>(false);
 
 	useEffect(() => {
 		audioStart.currentTime = 0;
@@ -32,7 +35,9 @@ export default function Skelebertle({
 	}, []);
 
 	useEffect(() => {
-		if (!gameOver && (timeRemaining <= 0 || score >= skeletons.length)) {
+		const maxScore = secretFound ? skeletons.length + 1 : skeletons.length;
+
+		if (!gameOver && (timeRemaining <= 0 || score >= maxScore)) {
 			setTimeRemaining(0);
 			setGameOver(true);
 			handleGameEnd(skelebertleResult(score));
@@ -40,11 +45,20 @@ export default function Skelebertle({
 				type: "info",
 			});
 		}
-	}, [timeRemaining, score, gameOver, handleGameEnd]);
+	}, [timeRemaining, score, gameOver, handleGameEnd, secretFound]);
 
 	function handleSkeletonClick() {
 		if (!gameOver) {
 			setScore((prev) => prev + 1);
+		}
+	}
+
+	function handleSecret() {
+		if (!gameOver && !secretFound) {
+			setScore((prev) => prev + 1);
+			setSecretFound(true);
+			audioSecret.currentTime = 0;
+			audioSecret.play();
 		}
 	}
 
@@ -58,6 +72,7 @@ export default function Skelebertle({
 						type: "info",
 					});
 				}}
+				onIconClick={handleSecret}
 			/>
 
 			{!gameOver && <div>⏳Skeletime left: {timeRemaining}s</div>}

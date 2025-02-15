@@ -5,10 +5,12 @@ export default function GameItem({
 	game,
 	result,
 	checkClipboard,
+	onIconClick,
 }: {
 	game: Game;
 	result: string | undefined;
 	checkClipboard: () => void;
+	onIconClick?: () => void;
 }) {
 	return (
 		<li className="flex items-center gap-2">
@@ -40,7 +42,19 @@ export default function GameItem({
 					!game.url && "pointer-events-none"
 				)}
 			>
-				<img src={game.icon} className="size-6 mix-blend-multiply"></img>
+				<img
+					src={game.icon}
+					className={clsx(
+						"size-6 mix-blend-multiply",
+						onIconClick && "cursor-pointer pointer-events-auto"
+					)}
+					onClick={(e) => {
+						if (onIconClick) {
+							e.preventDefault();
+							onIconClick();
+						}
+					}}
+				></img>
 				{game.name}
 			</a>
 		</li>
