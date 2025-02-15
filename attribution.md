@@ -2,3 +2,4 @@
 - evil laugh-08.wav by Nanakisan -- https://freesound.org/s/132802/ -- License: Attribution 4.0
 - Bomb - Small by Zangrutz -- https://freesound.org/s/155235/ -- License: Attribution 3.0
 - Dramatic Organ, A.wav by InspectorJ -- https://freesound.org/s/402095/ -- License: Attribution 4.0
+- Mystery Peak2 + by FoolBoyMedia -- https://freesound.org/s/256098/ -- License: Attribution NonCommercial 4.0

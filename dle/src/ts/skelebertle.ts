@@ -89,6 +89,12 @@ export const skeletons: SkeletonTemplate[] = [
 		imageUrl: imgSkele10,
 		sound: sndSkele10,
 	},
+	{
+		id: 11,
+		name: "The Skeledancers",
+		imageUrl: imgSkele11,
+		sound: sndSkele11,
+	},
 ];
 
 const trueMaxScore = skeletons.length + 1;
