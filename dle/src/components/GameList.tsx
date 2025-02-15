@@ -1,6 +1,6 @@
 import Skelebertle from "@/components/game/Skelebertle";
 import GameItem from "@/components/GameItem";
-import { Game, GameIds, GameResults } from "@/ts/games";
+import { Game, GameId, GameIds, GameResults } from "@/ts/games";
 
 export default function GameList({
 	games,
@@ -13,7 +13,7 @@ export default function GameList({
 	results: GameResults;
 	checkClipboard: () => void;
 	secret: boolean;
-	handleManualResult: (gameId: string, result: string) => void;
+	handleManualResult: (gameId: GameId, result: string) => void;
 }) {
 	return (
 		<ul className="flex flex-col gap-2 text-center">

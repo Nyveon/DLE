@@ -21,7 +21,7 @@ export interface SkeletonTemplate {
 	id: number;
 	name: string;
 	imageUrl: string;
-	sound: HTMLAudioElement;
+	sound: string;
 	volume?: number;
 }
 
@@ -30,56 +30,56 @@ export const skeletons: SkeletonTemplate[] = [
 		id: 1,
 		name: "Skeleberto",
 		imageUrl: imgSkele1,
-		sound: new Audio(sndSkele1),
+		sound: sndSkele1,
 	},
 	{
 		id: 2,
 		name: "YEEEEEEAHH!!!!",
 		imageUrl: imgSkele2,
-		sound: new Audio(sndSkele2),
+		sound: sndSkele2,
 	},
 	{
 		id: 3,
 		name: "Some sort of Dracula...",
 		imageUrl: imgSkele3,
-		sound: new Audio(sndSkele3),
+		sound: sndSkele3,
 		volume: 0.5,
 	},
 	{
 		id: 4,
 		name: "Sans Undertale",
 		imageUrl: imgSkele4,
-		sound: new Audio(sndSkele4),
+		sound: sndSkele4,
 	},
 	{
 		id: 5,
 		name: "THE SKELETON APPEARS",
 		imageUrl: imgSkele5,
-		sound: new Audio(sndSkele5),
+		sound: sndSkele5,
 	},
 	{
 		id: 6,
 		name: "Skelencio",
 		imageUrl: imgSkele6,
-		sound: new Audio(sndSkele6),
+		sound: sndSkele6,
 	},
 	{
 		id: 7,
 		name: "Skelethew",
 		imageUrl: imgSkele7,
-		sound: new Audio(sndSkele7),
+		sound: sndSkele7,
 	},
 	{
 		id: 8,
 		name: "Skelethon",
 		imageUrl: imgSkele8,
-		sound: new Audio(sndSkele8),
+		sound: sndSkele8,
 	},
 	{
 		id: 9,
 		name: "Skeloian3000",
 		imageUrl: imgSkele9,
-		sound: new Audio(sndSkele9),
+		sound: sndSkele9,
 	},
 ];
 

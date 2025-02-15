@@ -1,5 +1,5 @@
-import { SkeletonTemplate } from "@/components/game/Skelebertle";
-import { useState } from "react";
+import { SkeletonTemplate } from "@/ts/skelebertle";
+import { useRef, useState } from "react";
 
 function getRandomPosition() {
 	return {
@@ -17,16 +17,17 @@ export default function Skeleton({
 }) {
 	const [clicked, setClicked] = useState(false);
 	const [position] = useState(getRandomPosition());
+	const skeleAudio = useRef(new Audio(skele.sound));
 
 	function handleClick() {
 		setClicked(true);
-		skele.sound.currentTime = 0;
+		skeleAudio.current.currentTime = 0;
 
 		if (skele.volume) {
-			skele.sound.volume = skele.volume;
+			skeleAudio.current.volume = skele.volume;
 		}
 
-		skele.sound.play();
+		skeleAudio.current.play();
 
 		onSkeleClick();
 	}
@@ -46,6 +47,7 @@ export default function Skeleton({
 				top: `${position.x}%`,
 				left: `${position.y}%`,
 			}}
+			draggable="false"
 		/>
 	);
 }
