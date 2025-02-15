@@ -4,7 +4,7 @@ import { Game } from "@/ts/games";
 import GameItem from "@/components/GameItem";
 import { toast } from "react-toastify";
 
-import sndStart from "@/assets/sounds/laugh.wav";
+import sndStart from "@/assets/sounds/laugh.mp3";
 import sndSecret from "@/assets/sounds/bones.mp3";
 import { skelebertleResult, skeletons } from "@/ts/skelebertle";
 

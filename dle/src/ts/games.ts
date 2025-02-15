@@ -2,7 +2,7 @@ import iconConnections from "@/assets/icon-connections.svg";
 import iconOec from "@/assets/icon-oec.ico";
 import iconFoodGuessr from "@/assets/icon-foodguessr.png";
 import iconCountryle from "@/assets/icon-countryle.png";
-import skelegif from "@/assets/images/skelebertle.gif";
+import skelegif from "@/assets/images/skelebertle.webp";
 
 export const GameIds = [
 	"connections",
