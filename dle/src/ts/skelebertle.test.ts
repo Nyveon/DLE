@@ -1,27 +1,17 @@
 import { describe, it, expect, vi } from "vitest";
 import { skelebertleResult, skeletons } from "@/ts/skelebertle";
 
+const maxScorePossible = skeletons.length + 1;
+const expectedLength = maxScorePossible / 2;
+
 describe("skelebertleResult", () => {
-	it("returns a correctly formatted string", () => {
-		// Mock date to ensure consistent result
+	it("returns a correctly formatted string, where the first was on 2025-02-07", () => {
 		vi.useFakeTimers();
-		vi.setSystemTime(new Date("2025-02-10")); // Fixed test date
+		vi.setSystemTime(new Date("2025-02-08"));
 
-		const score = 4;
-		const result = skelebertleResult(score);
+		const result = skelebertleResult(1);
 
-		// Calculate expected skeleton number
-		const expectedNumber = Math.floor(
-			(new Date("2025-02-10").getTime() - new Date("2025-02-06").getTime()) /
-				(1000 * 60 * 60 * 24)
-		);
-
-		const expectedEmojis =
-			"🦴".repeat(score) + "🌑".repeat(skeletons.length - score);
-
-		expect(result).toBe(
-			`Skelebertle: Skeleberto #${expectedNumber}\n${expectedEmojis}`
-		);
+		expect(result).toContain("Skelebertle: Skeleberto #2\n");
 
 		vi.useRealTimers();
 	});
@@ -31,16 +21,7 @@ describe("skelebertleResult", () => {
 		vi.setSystemTime(new Date("2025-02-10"));
 
 		const result = skelebertleResult(0);
-		const expectedNumber = Math.floor(
-			(new Date("2025-02-10").getTime() - new Date("2025-02-06").getTime()) /
-				(1000 * 60 * 60 * 24)
-		);
-
-		expect(result).toBe(
-			`Skelebertle: Skeleberto #${expectedNumber}\n${"🌑".repeat(
-				skeletons.length
-			)}`
-		);
+		expect(result).toContain("🌑".repeat(expectedLength));
 
 		vi.useRealTimers();
 	});
@@ -49,24 +30,28 @@ describe("skelebertleResult", () => {
 		vi.useFakeTimers();
 		vi.setSystemTime(new Date("2025-02-10"));
 
-		const result = skelebertleResult(skeletons.length);
-		const expectedNumber = Math.floor(
-			(new Date("2025-02-10").getTime() - new Date("2025-02-06").getTime()) /
-				(1000 * 60 * 60 * 24)
-		);
+		const result = skelebertleResult(maxScorePossible);
+		expect(result).toContain("💀".repeat(expectedLength));
 
-		expect(result).toBe(
-			`Skelebertle: Skeleberto #${expectedNumber}\n${"🦴".repeat(
-				skeletons.length
-			)}`
-		);
+		vi.useRealTimers();
+	});
+
+	it("handles partial score correctl", () => {
+		vi.useFakeTimers();
+		vi.setSystemTime(new Date("2025-02-10"));
+
+		const unevenPartial = Math.floor(maxScorePossible / 2) + 1;
+		const result = skelebertleResult(unevenPartial);
+		expect(result).toContain("🦴");
+		expect(result).toContain("💀💀");
+		expect(result).toContain("🌑🌑");
 
 		vi.useRealTimers();
 	});
 
 	it("changes number based on the date", () => {
 		vi.useFakeTimers();
-		vi.setSystemTime(new Date("2025-02-12")); // Different test date
+		vi.setSystemTime(new Date("2025-02-12"));
 
 		const result = skelebertleResult(3);
 		const expectedNumber = Math.floor(
