@@ -1,3 +1,4 @@
+import Skelebertle from "@/components/game/Skelebertle";
 import GameItem from "@/components/GameItem";
 import { Game, GameIds, GameResults } from "@/ts/games";
 
@@ -6,11 +7,13 @@ export default function GameList({
 	results,
 	checkClipboard,
 	secret,
+	handleManualResult,
 }: {
 	games: Record<string, Game>;
 	results: GameResults;
 	checkClipboard: () => void;
 	secret: boolean;
+	handleManualResult: (gameId: string, result: string) => void;
 }) {
 	return (
 		<ul className="flex flex-col gap-2 text-center">
@@ -18,8 +21,20 @@ export default function GameList({
 				const game = games[gameId];
 				const result = results[gameId];
 
-				if (game.secret && !secret) {
-					return [];
+				if (game.secret) {
+					if (secret) {
+						return (
+							<Skelebertle
+								key={gameId}
+								game={game}
+								handleGameEnd={(result: string) =>
+									handleManualResult(gameId, result)
+								}
+							/>
+						);
+					} else {
+						return [];
+					}
 				}
 
 				return (

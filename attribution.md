@@ -1,0 +1,4 @@
+- horror laugh original - 132802__nanakisan__evil-laugh-08.wav by klankbeeld -- https://freesound.org/s/133674/ -- License: Attribution 4.0
+- evil laugh-08.wav by Nanakisan -- https://freesound.org/s/132802/ -- License: Attribution 4.0
+- Bomb - Small by Zangrutz -- https://freesound.org/s/155235/ -- License: Attribution 3.0
+- Dramatic Organ, A.wav by InspectorJ -- https://freesound.org/s/402095/ -- License: Attribution 4.0
