@@ -1,5 +1,5 @@
 import { SkeletonObject } from "@/ts/skelebertle";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 function getRandomPosition() {
 	return {
