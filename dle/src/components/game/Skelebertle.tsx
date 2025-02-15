@@ -8,8 +8,12 @@ import sndStart from "@/assets/sounds/laugh.mp3";
 import sndSecret from "@/assets/sounds/bones.mp3";
 import { skelebertleResult, skeletons } from "@/ts/skelebertle";
 
+// Preload
 const audioStart = new Audio(sndStart);
 const audioSecret = new Audio(sndSecret);
+skeletons.forEach((skele) => {
+	new Image().src = skele.imageUrl;
+});
 
 export default function Skelebertle({
 	game,
