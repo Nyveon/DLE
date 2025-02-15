@@ -29,7 +29,7 @@ export interface SkeletonTemplate {
 	volume?: number;
 }
 
-export const skeletons: SkeletonTemplate[] = [
+export const skeletonTemplates: SkeletonTemplate[] = [
 	{
 		id: 1,
 		name: "Skeleberto",
@@ -98,6 +98,27 @@ export const skeletons: SkeletonTemplate[] = [
 		sound: sndSkele11,
 	},
 ];
+
+export interface SkeletonObject {
+	id: number;
+	name: string;
+	audio: HTMLAudioElement;
+	image: HTMLImageElement;
+	volume?: number;
+}
+
+export const skeletons: SkeletonObject[] = skeletonTemplates.map((template) => {
+	const img = new Image();
+	img.src = template.imageUrl;
+
+	return {
+		id: template.id,
+		name: template.name,
+		audio: new Audio(template.sound),
+		image: img,
+		volume: template.volume,
+	};
+});
 
 const trueMaxScore = skeletons.length + 1;
 

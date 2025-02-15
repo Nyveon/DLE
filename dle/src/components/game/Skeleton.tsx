@@ -1,4 +1,4 @@
-import { SkeletonTemplate } from "@/ts/skelebertle";
+import { SkeletonObject } from "@/ts/skelebertle";
 import { useRef, useState } from "react";
 
 function getRandomPosition() {
@@ -12,22 +12,21 @@ export default function Skeleton({
 	skele,
 	onSkeleClick,
 }: {
-	skele: SkeletonTemplate;
+	skele: SkeletonObject;
 	onSkeleClick: () => void;
 }) {
 	const [clicked, setClicked] = useState(false);
 	const [position] = useState(getRandomPosition());
-	const skeleAudio = useRef(new Audio(skele.sound));
 
 	function handleClick() {
 		setClicked(true);
-		skeleAudio.current.currentTime = 0;
+		skele.audio.currentTime = 0;
 
 		if (skele.volume) {
-			skeleAudio.current.volume = skele.volume;
+			skele.audio.volume = skele.volume;
 		}
 
-		skeleAudio.current.play();
+		skele.audio.play();
 
 		onSkeleClick();
 	}
@@ -39,7 +38,7 @@ export default function Skeleton({
 	return (
 		<img
 			key={skele.id}
-			src={skele.imageUrl}
+			src={skele.image.src}
 			alt={skele.name}
 			className="absolute w-1/10 h-1/10 cursor-pointer select-none"
 			onClick={handleClick}
